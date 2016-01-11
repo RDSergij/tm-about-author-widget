@@ -57,6 +57,7 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 				'title'		=> __( 'About me', PHOTOLAB_BASE_TM_ALIAS ),
 				'user_id'	=> 1,
 				'image'		=> '',
+				'text_link'	=> __( 'Read more', PHOTOLAB_BASE_TM_ALIAS ),
 				'url'		=> home_url(),
 			);
 
@@ -120,7 +121,7 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 			}
 
 			// Ui cherri api
-			wp_register_script( 'tm-about-author-script-api', plugins_url( 'assets/js/cherry-api.js', __FILE__ ) );
+			wp_register_script( 'tm-about-author-script-api', plugins_url( 'assets/js/cherry-api.js', __FILE__ ), array( 'jquery' ) );
 			wp_localize_script( 'tm-about-author-script-api', 'cherry_ajax', wp_create_nonce( 'cherry_ajax_nonce' ) );
 			wp_localize_script( 'tm-about-author-script-api', 'wp_load_style', null );
 			wp_localize_script( 'tm-about-author-script-api', 'wp_load_script', null );
@@ -171,6 +172,30 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 						);
 			$users_html = $users_field->render();
 
+			$url_field = new UI_Text(
+							array(
+									'id'			=> $this->get_field_id( 'url' ),
+									'type'			=> 'url',
+									'name'			=> $this->get_field_name( 'url' ),
+									'placeholder'	=> __( 'detail url', PHOTOLAB_BASE_TM_ALIAS ),
+									'value'			=> $url,
+									'label'			=> __( 'Detail url', PHOTOLAB_BASE_TM_ALIAS ),
+							)
+					);
+			$url_html = $url_field->render();
+
+			$text_link_field = new UI_Text(
+							array(
+									'id'			=> $this->get_field_id( 'text_link' ),
+									'type'			=> 'text',
+									'name'			=> $this->get_field_name( 'text_link' ),
+									'placeholder'	=> __( 'link text', PHOTOLAB_BASE_TM_ALIAS ),
+									'value'			=> $text_link,
+									'label'			=> __( 'Link text', PHOTOLAB_BASE_TM_ALIAS ),
+							)
+					);
+			$text_link_html = $text_link_field->render();
+
 			$upload_file_field = new UI_Text(
 							array(
 									'id'			=> $this->get_field_id( 'upload_image_button' ),
@@ -185,6 +210,7 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 			$image_url_field = new UI_Text(
 							array(
 									'id'			=> $this->get_field_id( 'image' ),
+									'class'			=> ' custom-image-url',
 									'type'			=> 'hidden',
 									'name'			=> $this->get_field_name( 'image' ),
 									'value'			=> $image,
@@ -202,18 +228,6 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 							)
 					);
 			$delete_image_html = $delete_image_url_field->render();
-
-			$url_field = new UI_Text(
-							array(
-									'id'			=> $this->get_field_id( 'url' ),
-									'type'			=> 'url',
-									'name'			=> $this->get_field_name( 'url' ),
-									'placeholder'	=> __( 'detail url', PHOTOLAB_BASE_TM_ALIAS ),
-									'value'			=> $url,
-									'label'			=> __( 'Detail url', PHOTOLAB_BASE_TM_ALIAS ),
-							)
-					);
-			$url_html = $url_field->render();
 
 			$user_info = get_userdata( $user_id );
 

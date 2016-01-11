@@ -29,3 +29,9 @@
 		}
 	}
 }
+
+.wp-customizer {
+	#TB_overlay, #TB_window {
+		z-index: 999999;
+	}
+} 

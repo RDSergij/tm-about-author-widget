@@ -1,25 +1,28 @@
-jQuery( document ).ready( function( $ ) {
+/**
+ * Events list
+ */
+jQuery( document ).ready( initWidget );
+jQuery( document ).on( 'widget-updated widget-added ready', initWidget );
 
-	// Declare image elements
-	var inputImage = jQuery( '#' + window.TMAboutAuthorWidgetParam.image );
-	var inputAvatar = jQuery( '#' + window.TMAboutAuthorWidgetParam.avatar + ' img' );
-
-	// Init Cherry Api
-	window.CHERRY_API.ui_elements.switcher.init( jQuery( 'body' ) );
+/**
+ * Initialization widget js
+ *
+ * @returns {undefined}
+ */
+function initWidget() {
 
 	// Upload image
-	$( document ).on( 'click', '.upload_image_button', function() {
-
-		jQuery.data( document.body, 'prevElement', $( this ).prev() );
+	jQuery( '.upload_image_button' ).click( function() {
+		var _this = jQuery( this );
+		var inputImage = _this.parents( '.tm-about-author-form-widget' ).find( '.custom-image-url' );
+		var inputAvatar = _this.parents( '.tm-about-author-form-widget' ).find( '.avatar img' );
 
 		window.send_to_editor = function( html ) {
+
 			var imgurl = jQuery( 'img', html ).attr( 'src' );
 
-			if ( undefined !== inputImage && '' !== inputImage )
-			{
-				inputImage.val( imgurl );
-				inputAvatar.attr( 'src', imgurl );
-			}
+			inputImage.val( imgurl ).trigger( 'change' );;
+			inputAvatar.attr( 'src', imgurl );
 
 			window.tb_remove();
 		};
@@ -29,9 +32,12 @@ jQuery( document ).ready( function( $ ) {
 	});
 
 	// Delete image
-	$( document ).on( 'click', '.delete_image_url', function() {
+	jQuery( '.delete_image_url' ).click( function() {
+		_this = jQuery( this );
+		var inputImage = _this.parents( '.tm-about-author-form-widget' ).find( '.custom-image-url' );
+		var inputAvatar = _this.parents( '.tm-about-author-form-widget' ).find( '.avatar img' );
 		var defaultAvatar = inputAvatar.attr( 'default_image' );
 		inputAvatar.attr( 'src', defaultAvatar );
-		inputImage.val( '' );
+		inputImage.val( '' ).trigger( 'change' );
 	});
-});
+}

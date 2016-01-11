@@ -27,6 +27,10 @@ if ( ! defined( 'WPINC' ) ) {
 	</p>
 
 	<p>
+		<?php echo $text_link_html ?>
+	</p>
+
+	<p>
 		<label><?php _e( 'Custom image', PHOTOLAB_BASE_TM_ALIAS ) ?></label><br/>
 		<?php echo $upload_html ?>
 		<?php echo $delete_image_html ?>

@@ -8,4 +8,6 @@
 .tm-about-author-form-widget .avatar { text-align: center; }
 .tm-about-author-form-widget .avatar img { width: 128px; }
 
+.wp-customizer #TB_overlay, .wp-customizer #TB_window { z-index: 999999; }
+
 /*# sourceMappingURL=admin.min.css.map */
