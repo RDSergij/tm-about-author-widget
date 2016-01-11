@@ -13,12 +13,6 @@
  * @since 1.0.0
  */
 
-// Turn off error reporting
-error_reporting(1);
-
-// Report runtime errors
-error_reporting(E_ALL);
-
 if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 	/**
 	 * Set constant text domain.
@@ -66,9 +60,9 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 				'url'		=> home_url(),
 			);
 
-			//disable WordPress sanitization to allow more than just $allowedtags from /wp-includes/kses.php
-			remove_filter('pre_user_description', 'wp_filter_kses');
-			//add sanitization for WordPress posts
+			// disable WordPress sanitization to allow more than just $allowedtags from /wp-includes/kses.php
+			remove_filter( 'pre_user_description', 'wp_filter_kses' );
+			// add sanitization for WordPress posts
 			add_filter( 'pre_user_description', 'wp_filter_post_kses');
 		}
 
@@ -103,7 +97,7 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 			$user_info = get_userdata( $user_id );
 
 			if ( ! empty( $user_info->user_email ) ) {
-				$gravatar_url = get_avatar_url ( $user_info->user_email, array( 'size' => 512 ) );
+				$gravatar_url = get_avatar_url( $user_info->user_email, array( 'size' => 512 ) );
 
 				if ( ! empty( $image ) ) {
 					$main_avatar = $image;
@@ -223,15 +217,13 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 
 			$user_info = get_userdata( $user_id );
 
-			if ( ! empty( $user_info->user_email ) ) {
-				$gravatar_url = get_avatar_url ( $user_info->user_email, array( 'size' => 128 ) );
-			}
+			/*if ( ! empty( $user_info->user_email ) ) {
+				$gravatar_url = get_avatar_url( $user_info->user_email, array( 'size' => 128 ) );
+			}*/
 
 			$default_avatar = plugins_url( 'images/', __FILE__ ) . 'default-avatar.png';
 			if ( ! empty( $image ) ) {
 				$main_avatar = $image;
-			/*} elseif ( ! empty( $gravatar_url ) ) {
-				$main_avatar = $gravatar_url;*/
 			} else {
 				$main_avatar = $default_avatar;
 			}

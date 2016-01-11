@@ -1,6 +1,7 @@
 <?php
 /**
  * Frontend view
+ * 
  * @package TM_About_Author_Widget
  */
 
@@ -27,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 	<?php if ( $url ) : ?>
 	<div class="read-more">
 		<a href="<?php echo $url; ?>">
-			<?php _e('Read more', PHOTOLAB_BASE_TM_ALIAS) ?>
+			<?php _e( 'Read more', PHOTOLAB_BASE_TM_ALIAS ) ?>
 		</a>
 	</div>
 	<?php endif; ?>
