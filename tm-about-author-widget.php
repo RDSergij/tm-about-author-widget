@@ -2,7 +2,7 @@
 /**
  * Plugin Name:  TM About Author Widget
  * Plugin URI: https://github.com/RDSergij
- * Description: Posts about author widget
+ * Description: About author widget
  * Version: 1.0.0
  * Author: Osadchyi Serhii
  * Author URI: https://github.com/RDSergij
