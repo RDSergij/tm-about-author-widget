@@ -15,7 +15,7 @@ jQuery( document ).ready( function( $ ) {
 		window.send_to_editor = function( html ) {
 			var imgurl = jQuery( 'img', html ).attr( 'src' );
 
-			if ( undefined != inputImage && '' != inputImage )
+			if ( undefined !== inputImage && '' !== inputImage )
 			{
 				inputImage.val( imgurl );
 				inputAvatar.attr( 'src', imgurl );
