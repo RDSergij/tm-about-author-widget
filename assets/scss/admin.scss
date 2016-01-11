@@ -1,0 +1,30 @@
+/*
+* @section Widget form
+*/
+.tm-about-author-form-widget {
+	
+	clear: both;
+	width: 100%;
+	margin-bottom: 10px;
+	
+	.upload_image_button {
+	}
+
+	.button-image {
+		width: 48%;
+		display: inline;
+		cursor: pointer;
+	}
+
+	.delete_image_url {
+		background-color: #d54e21;
+		color: #FFF;
+	}
+
+	.avatar {
+		text-align: center;
+		img {
+			width: 128px;
+		}
+	}
+}

@@ -1,0 +1,10 @@
+/*
+* @section Widget form
+*/
+.tm-about-author-form-widget { clear: both; width: 100%; margin-bottom: 10px; }
+.tm-about-author-form-widget .button-image { width: 48%; display: inline; cursor: pointer; }
+.tm-about-author-form-widget .delete_image_url { background-color: #d54e21; color: #FFF; }
+.tm-about-author-form-widget .avatar { text-align: center; }
+.tm-about-author-form-widget .avatar img { width: 128px; }
+
+/*# sourceMappingURL=admin.min.css.map */

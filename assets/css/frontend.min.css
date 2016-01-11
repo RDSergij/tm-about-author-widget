@@ -1,0 +1,9 @@
+/*
+* @section Bio
+*/
+.tm-about-author-widget { padding: 5px; }
+.tm-about-author-widget .avatar { width: 100%; text-align: center; }
+.tm-about-author-widget .avatar img { width: 90%; }
+.tm-about-author-widget .info { padding: 30px; font-size: 14px; font-family: Verdana, sans-serif; }
+
+/*# sourceMappingURL=frontend.min.css.map */
