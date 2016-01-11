@@ -21,7 +21,7 @@ function initWidget() {
 
 			var imgurl = jQuery( 'img', html ).attr( 'src' );
 
-			inputImage.val( imgurl ).trigger( 'change' );;
+			inputImage.val( imgurl ).trigger( 'change' );
 			inputAvatar.attr( 'src', imgurl );
 
 			window.tb_remove();
@@ -33,7 +33,7 @@ function initWidget() {
 
 	// Delete image
 	jQuery( '.delete_image_url' ).click( function() {
-		_this = jQuery( this );
+		var _this = jQuery( this );
 		var inputImage = _this.parents( '.tm-about-author-form-widget' ).find( '.custom-image-url' );
 		var inputAvatar = _this.parents( '.tm-about-author-form-widget' ).find( '.avatar img' );
 		var defaultAvatar = inputAvatar.attr( 'default_image' );
