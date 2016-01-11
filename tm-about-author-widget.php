@@ -63,7 +63,7 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 			// disable WordPress sanitization to allow more than just $allowedtags from /wp-includes/kses.php
 			remove_filter( 'pre_user_description', 'wp_filter_kses' );
 			// add sanitization for WordPress posts
-			add_filter( 'pre_user_description', 'wp_filter_post_kses');
+			add_filter( 'pre_user_description', 'wp_filter_post_kses' );
 		}
 
 		/**
@@ -216,10 +216,6 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 			$url_html = $url_field->render();
 
 			$user_info = get_userdata( $user_id );
-
-			/*if ( ! empty( $user_info->user_email ) ) {
-				$gravatar_url = get_avatar_url( $user_info->user_email, array( 'size' => 128 ) );
-			}*/
 
 			$default_avatar = plugins_url( 'images/', __FILE__ ) . 'default-avatar.png';
 			if ( ! empty( $image ) ) {

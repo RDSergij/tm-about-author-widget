@@ -1,7 +1,7 @@
 <?php
 /**
  * Frontend view
- * 
+ *
  * @package TM_About_Author_Widget
  */
 
