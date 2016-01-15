@@ -18,7 +18,7 @@ function initWidget() {
 		var customUploader = wp.media( {
 			title: 'Upload a Image',
 			button: {
-				text: 'Select',
+				text: 'Select'
 			},
 			multiple: false
 		} );
