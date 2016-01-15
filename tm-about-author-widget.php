@@ -120,6 +120,8 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 				$$key = ! empty( $instance[ $key ] ) ? $instance[ $key ] : $value;
 			}
 
+			wp_enqueue_media();
+
 			// Ui cherri api
 			wp_register_script( 'tm-about-author-script-api', plugins_url( 'assets/js/cherry-api.js', __FILE__ ), array( 'jquery' ) );
 			wp_localize_script( 'tm-about-author-script-api', 'cherry_ajax', wp_create_nonce( 'cherry_ajax_nonce' ) );

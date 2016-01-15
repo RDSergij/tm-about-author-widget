@@ -1,7 +1,7 @@
 /**
  * Events list
  */
-jQuery( document ).ready( initWidget );
+//jQuery( document ).ready( initWidget );
 jQuery( document ).on( 'widget-updated widget-added ready', initWidget );
 
 /**
@@ -12,23 +12,24 @@ jQuery( document ).on( 'widget-updated widget-added ready', initWidget );
 function initWidget() {
 
 	// Upload image
-	jQuery( '.upload_image_button' ).click( function() {
+	jQuery( '.tm-about-author-form-widget input[type=button].upload_image_button' ).on( 'click', function( e ) {
+		e.preventDefault();
 		var _this = jQuery( this );
 		var inputImage = _this.parents( '.tm-about-author-form-widget' ).find( '.custom-image-url' );
 		var inputAvatar = _this.parents( '.tm-about-author-form-widget' ).find( '.avatar img' );
-
-		window.send_to_editor = function( html ) {
-
-			var imgurl = jQuery( 'img', html ).attr( 'src' );
-
+		var custom_uploader = wp.media( {
+			title: 'Upload a Image',
+			button: {
+				text: 'Select',
+			},
+			multiple: false
+		} );
+		custom_uploader.on('select', function() {
+			var imgurl = custom_uploader.state().get( 'selection' ).first().attributes.url;
 			inputImage.val( imgurl ).trigger( 'change' );
 			inputAvatar.attr( 'src', imgurl );
-
-			window.tb_remove();
-		};
-
-		window.tb_show( '', 'media-upload.php?type=image&TB_iframe=true' );
-		return false;
+		});
+		custom_uploader.open();
 	});
 
 	// Delete image
