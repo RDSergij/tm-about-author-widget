@@ -12,7 +12,9 @@ if ( ! defined( 'WPINC' ) ) {
 ?>
 
 <div class="tm-about-author-widget">
+	<?php if ( ! empty( $title ) ) : ?>
 	<h3><?php echo $title ?></h3>
+	<?php endif; ?>
 	<div class="avatar">
 		<img src="<?php echo $main_avatar ?>">
 	</div>
@@ -26,7 +28,7 @@ if ( ! defined( 'WPINC' ) ) {
 		</div>
 		<?php endif; ?>
 	</div>
-	<?php if ( $url ) : ?>
+	<?php if ( ! empty( $url ) ) : ?>
 	<div class="read-more">
 		<a href="<?php echo $url ?>">
 			<?php echo $text_link ?>

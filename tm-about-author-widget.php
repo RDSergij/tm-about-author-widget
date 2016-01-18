@@ -54,11 +54,11 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 			);
 			// Set default settings
 			$this->instance_default = array(
-				'title'		=> __( 'About me', PHOTOLAB_BASE_TM_ALIAS ),
+				'title'		=> __( '', PHOTOLAB_BASE_TM_ALIAS ),
 				'user_id'	=> 1,
 				'image'		=> '',
 				'text_link'	=> __( 'Read more', PHOTOLAB_BASE_TM_ALIAS ),
-				'url'		=> home_url(),
+				'url'		=> '',
 			);
 
 			// disable WordPress sanitization to allow more than just $allowedtags from /wp-includes/kses.php
@@ -122,13 +122,6 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 
 			wp_enqueue_media();
 
-			// Ui cherri api
-			wp_register_script( 'tm-about-author-script-api', plugins_url( 'assets/js/cherry-api.js', __FILE__ ), array( 'jquery' ) );
-			wp_localize_script( 'tm-about-author-script-api', 'cherry_ajax', wp_create_nonce( 'cherry_ajax_nonce' ) );
-			wp_localize_script( 'tm-about-author-script-api', 'wp_load_style', null );
-			wp_localize_script( 'tm-about-author-script-api', 'wp_load_script', null );
-			wp_enqueue_script( 'tm-about-author-script-api' );
-
 			wp_enqueue_script( 'media-upload' );
 			wp_enqueue_script( 'thickbox' );
 
@@ -144,92 +137,89 @@ if ( ! class_exists( 'TM_About_Author_Widget' ) ) {
 			wp_enqueue_style( 'thickbox' );
 
 			// include ui-elements
-			require_once __DIR__ . '/admin/lib/ui-elements/ui-text/ui-text.php';
-			require_once __DIR__ . '/admin/lib/ui-elements/ui-select/ui-select.php';
+			require_once __DIR__ . '/admin/lib/fox-ui-elements/ui-input.php';
+			require_once __DIR__ . '/admin/lib/fox-ui-elements/ui-select.php';
 
-			$title_field = new UI_Text(
-							array(
-									'id'            => $this->get_field_id( 'title' ),
-									'type'          => 'text',
-									'name'          => $this->get_field_name( 'title' ),
-									'placeholder'   => __( 'New title', PHOTOLAB_BASE_TM_ALIAS ),
-									'value'         => $title,
-									'label'         => __( 'Title widget', PHOTOLAB_BASE_TM_ALIAS ),
-							)
-					);
-			$title_html = $title_field->render();
+			$title_field = new UI_Input_Fox(
+					array(
+						'id'			=> $this->get_field_id( 'title' ),
+						'name'			=> $this->get_field_name( 'title' ),
+						'value'			=> $title,
+						'placeholder'	=> __( 'New title', PHOTOLAB_BASE_TM_ALIAS ),
+						'label'			=> __( 'Title widget', PHOTOLAB_BASE_TM_ALIAS ),
+					)
+			);
+			$title_html = $title_field->output();
 
 			$users_list = get_users();
 			foreach ( $users_list as $user ) {
 				$users[ $user->ID ] = $user->display_name;
 			}
 
-			$users_field = new UI_Select(
-							array(
-								'id'				=> $this->get_field_id( 'user_id' ),
-								'name'				=> $this->get_field_name( 'user_id' ),
-								'value'				=> $user_id,
-								'options'			=> $users,
-							)
-						);
-			$users_html = $users_field->render();
-
-			$url_field = new UI_Text(
-							array(
-									'id'			=> $this->get_field_id( 'url' ),
-									'type'			=> 'url',
-									'name'			=> $this->get_field_name( 'url' ),
-									'placeholder'	=> __( 'detail url', PHOTOLAB_BASE_TM_ALIAS ),
-									'value'			=> $url,
-									'label'			=> __( 'Detail url', PHOTOLAB_BASE_TM_ALIAS ),
-							)
+			$users_field = new UI_Select_Fox(
+						array(
+							'id'				=> $this->get_field_id( 'user_id' ),
+							'name'				=> $this->get_field_name( 'user_id' ),
+							'default'			=> $user_id,
+							'options'			=> $users,
+						)
 					);
-			$url_html = $url_field->render();
+			$users_html = $users_field->output();
 
-			$text_link_field = new UI_Text(
-							array(
-									'id'			=> $this->get_field_id( 'text_link' ),
-									'type'			=> 'text',
-									'name'			=> $this->get_field_name( 'text_link' ),
-									'placeholder'	=> __( 'link text', PHOTOLAB_BASE_TM_ALIAS ),
-									'value'			=> $text_link,
-									'label'			=> __( 'Link text', PHOTOLAB_BASE_TM_ALIAS ),
-							)
-					);
-			$text_link_html = $text_link_field->render();
+			$url_field = new UI_Input_Fox(
+					array(
+						'id'			=> $this->get_field_id( 'url' ),
+						'name'			=> $this->get_field_name( 'url' ),
+						'value'			=> $url,
+						'placeholder'	=> __( 'detail url', PHOTOLAB_BASE_TM_ALIAS ),
+						'label'			=> __( 'Detail url', PHOTOLAB_BASE_TM_ALIAS ),
+					)
+			);
+			$url_html = $url_field->output();
 
-			$upload_file_field = new UI_Text(
-							array(
-									'id'			=> $this->get_field_id( 'upload_image_button' ),
-									'class'			=> 'upload_image_button button-image',
-									'type'			=> 'button',
-									'name'			=> $this->get_field_name( 'upload_image_button' ),
-									'value'			=> __( 'Upload image', PHOTOLAB_BASE_TM_ALIAS ),
-							)
-					);
-			$upload_html = $upload_file_field->render();
+			$text_link_field = new UI_Input_Fox(
+					array(
+						'id'			=> $this->get_field_id( 'text_link' ),
+						'name'			=> $this->get_field_name( 'text_link' ),
+						'value'			=> $text_link,
+						'placeholder'	=> __( 'link text', PHOTOLAB_BASE_TM_ALIAS ),
+						'label'			=> __( 'Link text', PHOTOLAB_BASE_TM_ALIAS ),
+					)
+			);
+			$text_link_html = $text_link_field->output();
 
-			$image_url_field = new UI_Text(
-							array(
-									'id'			=> $this->get_field_id( 'image' ),
-									'class'			=> ' custom-image-url',
-									'type'			=> 'hidden',
-									'name'			=> $this->get_field_name( 'image' ),
-									'value'			=> $image,
-							)
-					);
-			$image_html = $image_url_field->render();
+			$upload_file_field = new UI_Input_Fox(
+					array(
+						'id'			=> $this->get_field_id( 'upload_image_button' ),
+						'class'			=> 'upload_image_button button-image',
+						'type'			=> 'button',
+						'name'			=> $this->get_field_name( 'upload_image_button' ),
+						'value'			=> __( 'Upload image', PHOTOLAB_BASE_TM_ALIAS ),
+					)
+			);
+			$upload_html = $upload_file_field->output();
 
-			$delete_image_url_field = new UI_Text(
-							array(
-									'id'			=> $this->get_field_id( 'delete_image' ),
-									'class'			=> 'delete_image_url button-image',
-									'type'			=> 'button',
-									'name'			=> $this->get_field_name( 'delete_image' ),
-									'value'			=> __( 'Delete image', PHOTOLAB_BASE_TM_ALIAS ),
-							)
-					);
-			$delete_image_html = $delete_image_url_field->render();
+			$image_url_field = new UI_Input_Fox(
+					array(
+						'id'			=> $this->get_field_id( 'image' ),
+						'class'			=> ' custom-image-url',
+						'type'			=> 'hidden',
+						'name'			=> $this->get_field_name( 'image' ),
+						'value'			=> $image,
+					)
+			);
+			$image_html = $image_url_field->output();
+
+			$delete_image_url_field = new UI_Input_Fox(
+					array(
+						'id'			=> $this->get_field_id( 'delete_image' ),
+						'class'			=> 'delete_image_url button-image',
+						'type'			=> 'button',
+						'name'			=> $this->get_field_name( 'delete_image' ),
+						'value'			=> __( 'Delete image', PHOTOLAB_BASE_TM_ALIAS ),
+					)
+			);
+			$delete_image_html = $delete_image_url_field->output();
 
 			$user_info = get_userdata( $user_id );
 

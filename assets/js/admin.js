@@ -1,14 +1,14 @@
 /**
  * Events list
  */
-jQuery( document ).on( 'widget-updated widget-added ready', initWidget );
+jQuery( document ).on( 'widget-updated widget-added ready', initWidgetAboutAuthor );
 
 /**
  * Initialization widget js
  *
  * @returns {undefined}
  */
-function initWidget() {
+function initWidgetAboutAuthor() {
 
 	// Upload image
 	jQuery( '.tm-about-author-form-widget input[type=button].upload_image_button' ).on( 'click', function( e ) {
